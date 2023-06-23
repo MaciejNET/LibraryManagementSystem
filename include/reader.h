@@ -14,7 +14,6 @@ private:
     std::string lastName;
     std::string email;
     BorrowedBooksLinkedList borrowedBooks;
-
 public:
     Reader(std::string  firstName, std::string  lastName, std::string  email);
     Reader(const Reader& other);
@@ -23,6 +22,7 @@ public:
     std::string getEmail() const;
     std::string getFullName() const;
     void borrowBook(const Book& book, const std::string& borrowedDate);
+    void insertBook(const Book& book, const std::string& borrowedDate);
     void returnBook(const Book& book);
     void displayBorrowedBooks() const;
     const BorrowedBooksLinkedList& getBorrowedBooks() const;

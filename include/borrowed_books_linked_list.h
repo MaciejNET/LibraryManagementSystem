@@ -8,6 +8,7 @@
 #include <iostream>
 #include <utility>
 #include "book.h"
+#include "console.h"
 
 class BorrowedBooksLinkedList {
 public:

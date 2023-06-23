@@ -38,8 +38,10 @@ int main(int argc, const char * argv[]) {
 
                 if (exists) {
                     library.addBookCount(title, author, count);
+                    Console::printInformation("Book \"" + title + "\" has been found. Adding book count to existing book.");
                 } else {
                     library.addBook(book);
+                    Console::printSuccess("Book \"" + title + "\" has been added to library.");
                 }
 
                 break;
@@ -56,6 +58,7 @@ int main(int argc, const char * argv[]) {
 
                 if (bookToRemove) {
                     library.removeBook(*bookToRemove);
+                    Console::printSuccess("Book \"" + title + "\" has been removed to library.");
                 } else {
                     Console::printError("Cannot find book to remove.");
                 }
@@ -78,6 +81,7 @@ int main(int argc, const char * argv[]) {
 
                 if (!existsByEmail) {
                     library.addReader(reader);
+                    Console::printSuccess("Reader \"" + reader.getFullName() + "\" has been added to library.");
                 } else {
                     Console::printError("Reader with email : \"" + email + "\" already exists.");
                 }
@@ -107,6 +111,7 @@ int main(int argc, const char * argv[]) {
 
                     if (reader) {
                         library.removeReader(*reader);
+                        Console::printSuccess("Reader \"" + reader->getFullName() + "\" has been removed to library.");
                     } else {
                         Console::printError("You pass wrong email.");
                     }
@@ -329,7 +334,7 @@ Library loadDataFromFile(const std::string& filename) {
                     if (book != nullptr) {
                         Reader* reader = library.findReaderByEmail(email);
                         if (reader != nullptr) {
-                            reader->borrowBook(*book, borrowedDate);
+                            reader->insertBook(*book, borrowedDate);
                         }
                     }
                 }

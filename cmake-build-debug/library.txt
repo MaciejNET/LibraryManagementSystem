@@ -1,4 +1,8 @@
-book,Test,Test,121
+book,Test,Test,120
+book,Test book,Test book,3
 book,Test2,Test2,123
+reader,Maciej,Deron,m@test.pl
+reader,Maciej,Deron,md@em.com
+borrowed,md@em.com,Test,Test,23/06/2023
 reader,Test,Test,Test
 borrowed,Test,Test,Test,23/06/2023

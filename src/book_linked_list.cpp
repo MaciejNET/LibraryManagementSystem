@@ -103,20 +103,26 @@ int BookLinkedList::getSize() const {
 
 void BookLinkedList::display() const {
     Node* current = head;
+    Console::clearConsole();
+    std::cout << "All books:" << std::endl;
     while (current) {
-        std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | << Count: " << current->data.getCount() << std::endl;
+        std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | Count: " << current->data.getCount() << std::endl;
         current = current->next;
     }
+    Console::waitForInput();
 }
 
 void BookLinkedList::displayAvailable() const {
     Node* current = head;
+    Console::clearConsole();
+    std::cout << "Available books:" << std::endl;
     while (current) {
         if (current->data.isAvailable()) {
-            std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | << Count: " << current->data.getCount() << std::endl;
+            std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | Count: " << current->data.getCount() << std::endl;
         }
         current = current->next;
     }
+    Console::waitForInput();
 }
 
 bool BookLinkedList::isAvailable(const Book &book) const {
