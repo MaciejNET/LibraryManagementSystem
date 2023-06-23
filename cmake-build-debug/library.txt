@@ -1,0 +1,4 @@
+book,Test,Test,121
+book,Test2,Test2,123
+reader,Test,Test,Test
+borrowed,Test,Test,Test,23/06/2023

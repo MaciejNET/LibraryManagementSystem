@@ -1,0 +1,3 @@
+/Users/maciejnet/proj_pp2/LibraryManagementSystem/cmake-build-debug/CMakeFiles/LibraryManagementSystem.dir
+/Users/maciejnet/proj_pp2/LibraryManagementSystem/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/maciejnet/proj_pp2/LibraryManagementSystem/cmake-build-debug/CMakeFiles/rebuild_cache.dir

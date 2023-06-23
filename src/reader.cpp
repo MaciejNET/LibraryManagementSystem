@@ -1,0 +1,67 @@
+//
+// Created by Maciej Deroń on 23/06/2023.
+//
+
+#include "../include/reader.h"
+
+#include <utility>
+
+Reader::Reader(std::string firstName, std::string lastName, std::string email) : firstName(std::move(firstName)), lastName(std::move(lastName)), email(std::move(email)), borrowedBooks(){
+}
+
+Reader::Reader(const Reader &other) : firstName(other.firstName), lastName(other.lastName), email(other.email), borrowedBooks() {
+    const BorrowedBooksLinkedList& otherBorrowedBooks = other.borrowedBooks;
+    BorrowedBooksLinkedList::Node* borrowedNode = otherBorrowedBooks.getFirst();
+    while (borrowedNode) {
+        borrowedBooks.insert(borrowedNode->book, borrowedNode->borrowedDate);
+        borrowedNode = borrowedNode->next;
+    }
+}
+
+std::string Reader::getFirstName() const{
+    return firstName;
+}
+
+std::string Reader::getLastName() const {
+    return lastName;
+}
+
+std::string Reader::getEmail() const {
+    return email;
+}
+
+std::string Reader::getFullName() const {
+    return firstName + " " + lastName;
+}
+
+void Reader::borrowBook(const Book &book, const std::string &borrowedDate) {
+    borrowedBooks.insert(book, borrowedDate);
+    std::cout << "Book \"" << book.getTitle() << "\" has been borrowed by " << getFullName() << " on " << borrowedDate << "." << std::endl;
+}
+
+void Reader::returnBook(const Book &book) {
+    borrowedBooks.remove(book);
+    std::cout << "Book \"" << book.getTitle() << "\" has been returned by " << getFullName() << "." << std::endl;
+}
+
+void Reader::displayBorrowedBooks() const {
+    std::cout << "Borrowed Books by " << getFullName() << ":" << std::endl;
+    borrowedBooks.display();
+}
+
+const BorrowedBooksLinkedList& Reader::getBorrowedBooks() const {
+    return borrowedBooks;
+}
+
+bool Reader::hasBook(const Book &book) const {
+    return getBorrowedBooks().contains(book);
+}
+
+bool Reader::operator==(const Reader& other) const {
+    return (firstName == other.firstName && lastName == other.lastName);
+}
+
+bool Reader::operator!=(const Reader& other) const {
+    return (firstName != other.firstName || lastName != other.lastName);
+}
+
