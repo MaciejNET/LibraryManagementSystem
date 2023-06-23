@@ -36,3 +36,13 @@
 723	776	1687546912370057290	LibraryManagementSystem	d4496da7ef93979d
 6	682	1687547032635305392	CMakeFiles/LibraryManagementSystem.dir/src/main.cpp.o	dfc9c9f948f479db
 682	733	1687547032688987151	LibraryManagementSystem	d4496da7ef93979d
+8	1075	1687549449021618399	CMakeFiles/LibraryManagementSystem.dir/src/console.cpp.o	68309bdd484d200b
+8	1078	1687549449021803103	CMakeFiles/LibraryManagementSystem.dir/src/reader.cpp.o	926d0577125721cc
+8	1079	1687549449021482568	CMakeFiles/LibraryManagementSystem.dir/src/reader_double_linked_list.cpp.o	ecece735a1c4f2c2
+8	1080	1687549449029101600	CMakeFiles/LibraryManagementSystem.dir/src/book_linked_list.cpp.o	71dbfca97b23ed64
+8	1081	1687549449028883480	CMakeFiles/LibraryManagementSystem.dir/src/borrowed_books_linked_list.cpp.o	80646209439e0bb
+7	1114	1687549449064502195	CMakeFiles/LibraryManagementSystem.dir/src/main.cpp.o	dfc9c9f948f479db
+1076	1355	1687549449306308753	CMakeFiles/LibraryManagementSystem.dir/src/library.cpp.o	713cc34d7a5d4cee
+1355	1415	1687549449368126319	LibraryManagementSystem	d4496da7ef93979d
+6	464	1687549505116223116	CMakeFiles/LibraryManagementSystem.dir/src/main.cpp.o	dfc9c9f948f479db
+464	515	1687549505173127171	LibraryManagementSystem	d4496da7ef93979d

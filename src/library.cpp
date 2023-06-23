@@ -34,8 +34,16 @@ void Library::returnBook(Book& book, Reader& reader) {
     reader.returnBook(book);
 }
 
+void Library::displayAllBooks() const {
+    books.display();
+}
+
 void Library::displayAvailableBooks() const {
     books.displayAvailable();
+}
+
+void Library::displayAllReaders() const {
+    readers.display();
 }
 
 void Library::displayBorrowedBooksByReader(const Reader& reader) const {

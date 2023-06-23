@@ -132,8 +132,11 @@ int ReaderDoubleLinkedList::getSize() const {
 
 void ReaderDoubleLinkedList::display() const {
     Node* current = head;
+    Console::clearConsole();
+    std::cout << "Wszyscy czytelnicy: " << std::endl;
     while (current) {
-        std::cout << "Full name: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
+        std::cout << "Imię i nazwisko: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
         current = current->next;
     }
+    Console::waitForInput();
 }

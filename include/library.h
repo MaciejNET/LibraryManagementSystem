@@ -20,7 +20,9 @@ public:
     void removeReader(const Reader& reader);
     void borrowBook(Book& book, Reader& reader, const std::string& borrowedDate);
     void returnBook(Book& book, Reader& reader);
+    void displayAllBooks() const;
     void displayAvailableBooks() const;
+    void displayAllReaders() const;
     void displayBorrowedBooksByReader(const Reader& reader) const;
 
     Book* findBook(const std::string& title, const std::string& author) const;

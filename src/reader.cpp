@@ -36,7 +36,7 @@ std::string Reader::getFullName() const {
 
 void Reader::borrowBook(const Book &book, const std::string &borrowedDate) {
     borrowedBooks.insert(book, borrowedDate);
-    Console::printSuccess("Book \"" + book.getTitle() + "\" has been borrowed by " + getFullName() + " on " + borrowedDate + ".");
+    Console::printSuccess("Książka \"" + book.getTitle() + "\" została wypożyczona przez " + getFullName() + " - " + borrowedDate + ".");
 }
 
 void Reader::insertBook(const Book &book, const std::string &borrowedDate) {
@@ -45,12 +45,12 @@ void Reader::insertBook(const Book &book, const std::string &borrowedDate) {
 
 void Reader::returnBook(const Book &book) {
     borrowedBooks.remove(book);
-    Console::printSuccess("Book \"" + book.getTitle() + "\" has been returned by " + getFullName() + ".");
+    Console::printSuccess("Książka \"" + book.getTitle() + "\" została zwrócona przez " + getFullName() + ".");
 }
 
 void Reader::displayBorrowedBooks() const {
     Console::clearConsole();
-    std::cout << "Borrowed Books by " << getFullName() << ":" << std::endl;
+    std::cout << "Wypożyczone ksiązki przez " << getFullName() << ":" << std::endl;
     borrowedBooks.display();
     Console::waitForInput();
 }

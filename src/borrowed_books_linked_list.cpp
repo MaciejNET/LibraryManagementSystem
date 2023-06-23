@@ -80,8 +80,11 @@ int BorrowedBooksLinkedList::getSize() const {
 
 void BorrowedBooksLinkedList::display() const {
     Node* current = head;
+    Console::clearConsole();
+    std::cout << "Książki wypożyczone przez czytelnika:" << std::endl;
     while (current) {
-        std::cout << "Title: " << current->book.getTitle() << " | Author: " << current->book.getAuthor() << " | Borrowed date: " << current->borrowedDate << std::endl;
+        std::cout << "Tytuł: " << current->book.getTitle() << " | Autor: " << current->book.getAuthor() << " | Data wypożyczenia: " << current->borrowedDate << std::endl;
         current = current->next;
     }
+    Console::waitForInput();
 }
