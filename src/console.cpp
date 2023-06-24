@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/console.h"
 #include <iostream>
 #include <cstdlib>
@@ -18,7 +14,7 @@ namespace Console {
     }
 
     void waitForInput() {
-        std::cout << "Wciśnij enter aby kontynułować..." << std::endl;
+        std::cout << "Wcisnij enter aby kontynulowac..." << std::endl;
         getchar();
     }
 
@@ -38,7 +34,7 @@ namespace Console {
 
     void printError(const std::string &message) {
         clearConsole();
-        std::cout << "Błąd!" << std::endl;
+        std::cout << "Blad!" << std::endl;
         std::cout << message << std::endl;
         waitForInput();
     }

@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/reader_double_linked_list.h"
 
 ReaderDoubleLinkedList::~ReaderDoubleLinkedList() {
@@ -135,7 +131,7 @@ void ReaderDoubleLinkedList::display() const {
     Console::clearConsole();
     std::cout << "Wszyscy czytelnicy: " << std::endl;
     while (current) {
-        std::cout << "Imię i nazwisko: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
+        std::cout << "Imie i nazwisko: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
         current = current->next;
     }
     Console::waitForInput();

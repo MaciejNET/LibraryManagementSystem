@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/reader.h"
 
 #include <utility>
@@ -36,7 +32,7 @@ std::string Reader::getFullName() const {
 
 void Reader::borrowBook(const Book &book, const std::string &borrowedDate) {
     borrowedBooks.insert(book, borrowedDate);
-    Console::printSuccess("Książka \"" + book.getTitle() + "\" została wypożyczona przez " + getFullName() + " - " + borrowedDate + ".");
+    Console::printSuccess("Ksiazka \"" + book.getTitle() + "\" zostala wypozyczona przez " + getFullName() + " - " + borrowedDate + ".");
 }
 
 void Reader::insertBook(const Book &book, const std::string &borrowedDate) {
@@ -45,12 +41,12 @@ void Reader::insertBook(const Book &book, const std::string &borrowedDate) {
 
 void Reader::returnBook(const Book &book) {
     borrowedBooks.remove(book);
-    Console::printSuccess("Książka \"" + book.getTitle() + "\" została zwrócona przez " + getFullName() + ".");
+    Console::printSuccess("Ksiazka \"" + book.getTitle() + "\" zostala zwrocona przez " + getFullName() + ".");
 }
 
 void Reader::displayBorrowedBooks() const {
     Console::clearConsole();
-    std::cout << "Wypożyczone ksiązki przez " << getFullName() << ":" << std::endl;
+    std::cout << "Wypozyczone ksiazki przez " << getFullName() << ":" << std::endl;
     borrowedBooks.display();
     Console::waitForInput();
 }

@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/borrowed_books_linked_list.h"
 
 BorrowedBooksLinkedList::~BorrowedBooksLinkedList() {
@@ -81,9 +77,9 @@ int BorrowedBooksLinkedList::getSize() const {
 void BorrowedBooksLinkedList::display() const {
     Node* current = head;
     Console::clearConsole();
-    std::cout << "Książki wypożyczone przez czytelnika:" << std::endl;
+    std::cout << "Ksiazki wypozyczone przez czytelnika:" << std::endl;
     while (current) {
-        std::cout << "Tytuł: " << current->book.getTitle() << " | Autor: " << current->book.getAuthor() << " | Data wypożyczenia: " << current->borrowedDate << std::endl;
+        std::cout << "Tytul: " << current->book.getTitle() << " | Autor: " << current->book.getAuthor() << " | Data wypozyczenia: " << current->borrowedDate << std::endl;
         current = current->next;
     }
     Console::waitForInput();

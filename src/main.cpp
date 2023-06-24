@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 #include "../include/library.h"
 
 const std::string FILE_NAME = "library.txt";
@@ -19,18 +21,18 @@ int main(int argc, const char * argv[]) {
         std::cin.ignore();
 
         switch (choice) {
-            //Dodaj książkę
+            //Dodaj ksiazke
             case 1: {
                 std::string title, author;
                 int count;
-                std::cout << "Tytuł: ";
+                std::cout << "Tytul: ";
                 std::getline(std::cin, title);
                 std::cout << "Autor: ";
                 std::getline(std::cin, author);
-                std::cout << "Ilość: ";
+                std::cout << "Ilosc: ";
                 std::cin >> count;
                 if (count <= 0) {
-                    Console::printError("Liczba książek musi być większa niż 0!");
+                    Console::printError("Liczba ksiazek musi być wieksza niz 0!");
                     break;
                 }
                 Book book(title, author, count);
@@ -38,19 +40,19 @@ int main(int argc, const char * argv[]) {
 
                 if (exists) {
                     library.addBookCount(title, author, count);
-                    Console::printInformation("Książka \"" + title + "\" już istnieje. Dodano " + std::to_string(count) + "książek.");
+                    Console::printInformation("Ksiazka \"" + title + "\" juz istnieje. Dodano " + std::to_string(count) + "ksiazek.");
                 } else {
                     library.addBook(book);
-                    Console::printSuccess("Książka \"" + title + "\" została dodana do biblioteki.");
+                    Console::printSuccess("Ksiazka \"" + title + "\" zostala dodana do biblioteki.");
                 }
 
                 break;
             }
 
-            //Usuń książkę
+            //Usun ksiazke
             case 2: {
                 std::string title, author;
-                std::cout << "Tytuł: ";
+                std::cout << "Tytul: ";
                 std::getline(std::cin, title);
                 std::cout << "Autor: ";
                 std::getline(std::cin, author);
@@ -59,9 +61,9 @@ int main(int argc, const char * argv[]) {
 
                 if (bookToRemove) {
                     library.removeBook(*bookToRemove);
-                    Console::printSuccess("Książka \"" + title + "\" została usunięta z biblioteki.");
+                    Console::printSuccess("Ksiazka \"" + title + "\" zostala usunieta z biblioteki.");
                 } else {
-                    Console::printError("Nie znaleziono książki.");
+                    Console::printError("Nie znaleziono ksiazki.");
                 }
 
                 break;
@@ -70,7 +72,7 @@ int main(int argc, const char * argv[]) {
             //Dodaj czytelnika
             case 3: {
                 std::string firstName, lastName, email;
-                std::cout << "Imię: ";
+                std::cout << "Imie: ";
                 std::getline(std::cin, firstName);
                 std::cout << "Nazwisko: ";
                 std::getline(std::cin, lastName);
@@ -83,18 +85,18 @@ int main(int argc, const char * argv[]) {
 
                 if (!existsByEmail) {
                     library.addReader(reader);
-                    Console::printSuccess("Czytelnik \"" + reader.getFullName() + "\" został dodany do biblioteki.");
+                    Console::printSuccess("Czytelnik \"" + reader.getFullName() + "\" zostal dodany do biblioteki.");
                 } else {
-                    Console::printError("Czytelnik z adresem email : \"" + email + "\" już istnieje.");
+                    Console::printError("Czytelnik z adresem email : \"" + email + "\" juz istnieje.");
                 }
 
                 break;
             }
 
-            //Usuń czytelnika
+            //Usun czytelnika
             case 4: {
                 std::string firstName, lastName;
-                std::cout << "Imię: ";
+                std::cout << "Imie: ";
                 std::getline(std::cin, firstName);
                 std::cout << "Nazwisko: ";
                 std::getline(std::cin, lastName);
@@ -105,28 +107,28 @@ int main(int argc, const char * argv[]) {
                     library.removeReader(*readers.getFirstReader());
                 } else {
                     std::string email;
-                    Console::printInformation("Znaleziono więcej niż jednego czytelnika o podanych danych.");
+                    Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunąć: ";
+                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
                     std::cin >> email;
 
                     Reader* reader = readers.findByEmail(email);
 
                     if (reader) {
                         library.removeReader(*reader);
-                        Console::printSuccess("Czytelnik \"" + reader->getFullName() + "\" został usunięty..");
+                        Console::printSuccess("Czytelnik \"" + reader->getFullName() + "\" zostal usuniety..");
                     } else {
-                        Console::printError("Podałeś nie prawidłowy email.");
+                        Console::printError("Podales nie prawidlowy email.");
                     }
                 }
 
                 break;
             }
 
-            //Wypożycz książkę
+            //Wypozycz ksiazke
             case 5: {
                 std::string title, author;
-                std::cout << "Tytuł: ";
+                std::cout << "Tytul: ";
                 std::getline(std::cin, title);
                 std::cout << "Autor: ";
                 std::getline(std::cin, author);
@@ -134,12 +136,12 @@ int main(int argc, const char * argv[]) {
                 Book* book = library.findBook(title, author);
 
                 if (!book) {
-                    Console::printError("Nie znaleziono książki.");
+                    Console::printError("Nie znaleziono ksiazki.");
                 } else if (book && !library.isBookAvailable(*book)) {
-                    Console::printError("Ksiązka nie jest dostępna.");
+                    Console::printError("Ksiazka nie jest dostepna.");
                 } else {
                     std::string firstName, lastName;
-                    std::cout << "Imię: ";
+                    std::cout << "Imie: ";
                     std::getline(std::cin, firstName);
                     std::cout << "Nazwisko: ";
                     std::getline(std::cin, lastName);
@@ -152,9 +154,9 @@ int main(int argc, const char * argv[]) {
                         reader = library.findReaderByEmail(email);
                     } else {
                         std::string email;
-                        Console::printInformation("Znaleziono więcej niż jednego czytelnika o podanych danych.");
+                        Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                         readers.display();
-                        std::cout << "Podaj email czytelnika, którego chcesz usunąć: ";
+                        std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
                         std::cin >> email;
 
                         reader = library.findReaderByEmail(email);
@@ -175,10 +177,10 @@ int main(int argc, const char * argv[]) {
                 break;
             }
 
-            //Zwróć ksiązkę
+            //Zwróć ksiazke
             case 6 : {
                 std::string firstName, lastName;
-                std::cout << "Imię: ";
+                std::cout << "Imie: ";
                 std::getline(std::cin, firstName);
                 std::cout << "Nazwisko: ";
                 std::getline(std::cin, lastName);
@@ -192,9 +194,9 @@ int main(int argc, const char * argv[]) {
                     reader = library.findReaderByEmail(email);
                 } else {
                     std::string email;
-                    Console::printInformation("Znaleziono więcej niż jednego czytelnika o podanych danych.");
+                    Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunąć: ";
+                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
                     std::cin >> email;
 
                     reader = readers.findByEmail(email);
@@ -202,9 +204,9 @@ int main(int argc, const char * argv[]) {
 
                 if (reader) {
                     reader->displayBorrowedBooks();
-                    std::cout << "Którą książkę chciałbyś zwrócić?" << std::endl;
+                    std::cout << "Która ksiazke chcialbys zwrócić?" << std::endl;
                     std::string title, author;
-                    std::cout << "Tytuł: ";
+                    std::cout << "Tytul: ";
                     std::getline(std::cin, title);
                     std::cout << "Autor: ";
                     std::getline(std::cin, author);
@@ -212,9 +214,9 @@ int main(int argc, const char * argv[]) {
                     Book* book = library.findBook(title, author);
 
                     if (!book) {
-                        Console::printError("Nie znaleziono ksiązki.");
+                        Console::printError("Nie znaleziono ksiazki.");
                     } else if (book && !reader->hasBook(*book)) {
-                        Console::printError("Nie można zwrócić ksiązki, która nie została wyporzyczona przez czytalnika.");
+                        Console::printError("Nie mozna zwrócić ksiazki, która nie zostala wyporzyczona przez czytalnika.");
                     } else {
                         library.returnBook(*book, *reader);
                     }
@@ -226,28 +228,28 @@ int main(int argc, const char * argv[]) {
                 break;
             }
 
-            //Wyświetl wszystkie książki
+            //Wyswietl wszystkie ksiazki
             case 7: {
                 library.displayAllBooks();
                 break;
             }
 
-            //Wyświetl dostępne książki
+            //Wyswietl dostepne ksiazki
             case 8 : {
                 library.displayAvailableBooks();
                 break;
             }
 
-            //Wyświetl wszyskich czytelników
+            //Wyswietl wszyskich czytelników
             case 9: {
                 library.displayAllReaders();
                 break;
             }
 
-            //Wyświetl książki wypożyczone przez czyetlnika
+            //Wyswietl ksiazki wypozyczone przez czyetlnika
             case 10: {
                 std::string firstName, lastName;
-                std::cout << "Imię: ";
+                std::cout << "Imie: ";
                 std::getline(std::cin, firstName);
                 std::cout << "Nazwisko: ";
                 std::getline(std::cin, lastName);
@@ -262,9 +264,9 @@ int main(int argc, const char * argv[]) {
                     library.displayBorrowedBooksByReader(*reader);
                 } else {
                     std::string email;
-                    Console::printInformation("Znaleziono więcej niż jednego czytelnika o podanych danych.");
+                    Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunąć: ";
+                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
                     std::cin >> email;
 
                     reader = readers.findByEmail(email);
@@ -285,7 +287,7 @@ int main(int argc, const char * argv[]) {
                 exit(0);
 
             default:
-                Console::printError("Nieprawidłowy wybór. Spróbuj ponownie.");
+                Console::printError("Nieprawidlowy wybór. Spróbuj ponownie.");
                 break;
         }
     }
@@ -321,7 +323,7 @@ void saveDataToFile(const Library& library, const std::string& filename) {
         file.close();
         Console::printSuccess("Zapisano do pliku: " + filename);
     } else {
-        Console::printError("Błąd przy otwarciu pliku: " + filename);
+        Console::printError("Blad przy otwarciu pliku: " + filename);
     }
 }
 
@@ -367,7 +369,7 @@ Library loadDataFromFile(const std::string& filename) {
         file.close();
         Console::printSuccess("Wczytano dane z pliku: " + filename);
     } else {
-        Console::printError("Błąd przy otwarciu pliku: " + filename);
+        Console::printError("Blad przy otwarciu pliku: " + filename);
     }
     return library;
 }
@@ -376,16 +378,16 @@ void displayMenu() {
     std::cout << "-----------------------" << std::endl;
     std::cout << "Baza danych biblioteki" << std::endl;
     std::cout << "-----------------------" << std::endl;
-    std::cout << "1. Dodaj książkę" << std::endl;
-    std::cout << "2. Usuń książkę" << std::endl;
+    std::cout << "1. Dodaj ksiazke" << std::endl;
+    std::cout << "2. Usun ksiazke" << std::endl;
     std::cout << "3. Dodaj czytelnika" << std::endl;
-    std::cout << "4. Usuń czytelnika" << std::endl;
-    std::cout << "5. Wypożycz książkę" << std::endl;
-    std::cout << "6. Zwróć książkę" << std::endl;
-    std::cout << "7. Wyświetl wszystkie książki" << std::endl;
-    std::cout << "8. Wyświetl dostępne książki" << std::endl;
-    std::cout << "9. Wyświetl wszystkich czytelników" << std::endl;
-    std::cout << "10. Wyśietl książki wypożyczone przez czytelnika" << std::endl;
+    std::cout << "4. Usun czytelnika" << std::endl;
+    std::cout << "5. Wypozycz ksiazke" << std::endl;
+    std::cout << "6. Zwróć ksiazke" << std::endl;
+    std::cout << "7. Wyswietl wszystkie ksiazki" << std::endl;
+    std::cout << "8. Wyswietl dostepne ksiazki" << std::endl;
+    std::cout << "9. Wyswietl wszystkich czytelników" << std::endl;
+    std::cout << "10. Wysietl ksiazki wypozyczone przez czytelnika" << std::endl;
     std::cout << "11. Koniec" << std::endl;
     std::cout << "-----------------------" << std::endl;
     std::cout << "Podaj swój wybór: ";

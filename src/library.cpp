@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/library.h"
 
 void Library::addBook(const Book& book) {

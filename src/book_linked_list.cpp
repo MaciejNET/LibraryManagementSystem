@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #include "../include/book_linked_list.h"
 BookLinkedList::~BookLinkedList() {
     Node* current = head;
@@ -104,9 +100,9 @@ int BookLinkedList::getSize() const {
 void BookLinkedList::display() const {
     Node* current = head;
     Console::clearConsole();
-    std::cout << "Wszystkie książki:" << std::endl;
+    std::cout << "Wszystkie ksiazki:" << std::endl;
     while (current) {
-        std::cout << "Tytuł: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilość: " << current->data.getCount() << std::endl;
+        std::cout << "Tytul: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilosc: " << current->data.getCount() << std::endl;
         current = current->next;
     }
     Console::waitForInput();
@@ -115,10 +111,10 @@ void BookLinkedList::display() const {
 void BookLinkedList::displayAvailable() const {
     Node* current = head;
     Console::clearConsole();
-    std::cout << "Dostępne książki:" << std::endl;
+    std::cout << "Dostępne ksiazki:" << std::endl;
     while (current) {
         if (current->data.isAvailable()) {
-            std::cout << "Tytuł: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilość: " << current->data.getCount() << std::endl;
+            std::cout << "Tytul: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilosc: " << current->data.getCount() << std::endl;
         }
         current = current->next;
     }

@@ -1,7 +1,3 @@
-//
-// Created by Maciej Deroń on 23/06/2023.
-//
-
 #ifndef LIBRARYMANAGEMENTSYSTEM_READER_H
 #define LIBRARYMANAGEMENTSYSTEM_READER_H
 
