@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
                 std::cout << "Ilosc: ";
                 std::cin >> count;
                 if (count <= 0) {
-                    Console::printError("Liczba ksiazek musi być wieksza niz 0!");
+                    Console::printError("Liczba ksiazek musi byc wieksza niz 0!");
                     break;
                 }
                 Book book(title, author, count);
@@ -109,7 +109,7 @@ int main(int argc, const char * argv[]) {
                     std::string email;
                     Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
+                    std::cout << "Podaj email czytelnika, ktorego chcesz usunac: ";
                     std::cin >> email;
 
                     Reader* reader = readers.findByEmail(email);
@@ -156,7 +156,7 @@ int main(int argc, const char * argv[]) {
                         std::string email;
                         Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                         readers.display();
-                        std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
+                        std::cout << "Podaj email czytelnika, ktorego chcesz usunac: ";
                         std::cin >> email;
 
                         reader = library.findReaderByEmail(email);
@@ -177,7 +177,7 @@ int main(int argc, const char * argv[]) {
                 break;
             }
 
-            //Zwróć ksiazke
+            //Zwroc ksiazke
             case 6 : {
                 std::string firstName, lastName;
                 std::cout << "Imie: ";
@@ -196,7 +196,7 @@ int main(int argc, const char * argv[]) {
                     std::string email;
                     Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
+                    std::cout << "Podaj email czytelnika, ktorego chcesz usunac: ";
                     std::cin >> email;
 
                     reader = readers.findByEmail(email);
@@ -204,7 +204,7 @@ int main(int argc, const char * argv[]) {
 
                 if (reader) {
                     reader->displayBorrowedBooks();
-                    std::cout << "Która ksiazke chcialbys zwrócić?" << std::endl;
+                    std::cout << "Ktora ksiazke chcialbys zwrocic?" << std::endl;
                     std::string title, author;
                     std::cout << "Tytul: ";
                     std::getline(std::cin, title);
@@ -216,7 +216,7 @@ int main(int argc, const char * argv[]) {
                     if (!book) {
                         Console::printError("Nie znaleziono ksiazki.");
                     } else if (book && !reader->hasBook(*book)) {
-                        Console::printError("Nie mozna zwrócić ksiazki, która nie zostala wyporzyczona przez czytalnika.");
+                        Console::printError("Nie mozna zwrocic ksiazki, ktora nie zostala wyporzyczona przez czytalnika.");
                     } else {
                         library.returnBook(*book, *reader);
                     }
@@ -240,7 +240,7 @@ int main(int argc, const char * argv[]) {
                 break;
             }
 
-            //Wyswietl wszyskich czytelników
+            //Wyswietl wszyskich czytelnikow
             case 9: {
                 library.displayAllReaders();
                 break;
@@ -266,7 +266,7 @@ int main(int argc, const char * argv[]) {
                     std::string email;
                     Console::printInformation("Znaleziono wiecej niz jednego czytelnika o podanych danych.");
                     readers.display();
-                    std::cout << "Podaj email czytelnika, którego chcesz usunać: ";
+                    std::cout << "Podaj email czytelnika, ktorego chcesz usunac: ";
                     std::cin >> email;
 
                     reader = readers.findByEmail(email);
@@ -287,7 +287,7 @@ int main(int argc, const char * argv[]) {
                 exit(0);
 
             default:
-                Console::printError("Nieprawidlowy wybór. Spróbuj ponownie.");
+                Console::printError("Nieprawidlowy wybor. Sprobuj ponownie.");
                 break;
         }
     }
@@ -383,12 +383,12 @@ void displayMenu() {
     std::cout << "3. Dodaj czytelnika" << std::endl;
     std::cout << "4. Usun czytelnika" << std::endl;
     std::cout << "5. Wypozycz ksiazke" << std::endl;
-    std::cout << "6. Zwróć ksiazke" << std::endl;
+    std::cout << "6. Zwroc ksiazke" << std::endl;
     std::cout << "7. Wyswietl wszystkie ksiazki" << std::endl;
     std::cout << "8. Wyswietl dostepne ksiazki" << std::endl;
-    std::cout << "9. Wyswietl wszystkich czytelników" << std::endl;
+    std::cout << "9. Wyswietl wszystkich czytelnikow" << std::endl;
     std::cout << "10. Wysietl ksiazki wypozyczone przez czytelnika" << std::endl;
     std::cout << "11. Koniec" << std::endl;
     std::cout << "-----------------------" << std::endl;
-    std::cout << "Podaj swój wybór: ";
+    std::cout << "Podaj swoj wybor: ";
 }
