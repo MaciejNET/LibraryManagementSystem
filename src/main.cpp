@@ -160,11 +160,13 @@ int main(int argc, const char * argv[]) {
                         reader = library.findReaderByEmail(email);
                     }
                     if (reader) {
-                        auto currentTime = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                        std::time_t currentTime = std::time(nullptr);
                         std::tm* localTime = std::localtime(&currentTime);
-                        std::string formattedDate(11, '\0');
-                        std::strftime(&formattedDate[0], formattedDate.size(), "%d/%m/%Y", localTime);
-                        formattedDate.resize(formattedDate.find('\0'));
+
+                        std::ostringstream oss;
+                        oss << std::put_time(localTime, "%d/%m/%Y");
+                        std::string formattedDate = oss.str();
+
                         library.borrowBook(*book, *reader, formattedDate);
                     } else {
                         Console::printError("Nie znaleziono czytelnika.");

@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "LibraryManagementSystem::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-LibraryManagementSystem-Debug-504512c39a599389f889.json",
+					"jsonFile" : "target-LibraryManagementSystem-Debug-0799ccb2fd94f3af1d3d.json",
 					"name" : "LibraryManagementSystem",
 					"projectIndex" : 0
 				}
@@ -55,6 +55,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 5
 	}
 }
