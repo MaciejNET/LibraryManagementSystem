@@ -1,83 +1,107 @@
 #include "../include/reader_double_linked_list.h"
 
-ReaderDoubleLinkedList::~ReaderDoubleLinkedList() {
-    Node* current = head;
-    while (current) {
-        Node* next = current->next;
+ReaderDoubleLinkedList::~ReaderDoubleLinkedList()
+{
+    Node *current = mHead;
+    while (current)
+    {
+        Node *next = current->next;
         delete current;
         current = next;
     }
 }
 
-void ReaderDoubleLinkedList::insert(const Reader& reader) {
-    Node* newNode = new Node(reader);
+void ReaderDoubleLinkedList::insert(const Reader &reader)
+{
+    Node *newNode = new Node(reader);
 
-    if (!head || (reader.getLastName() + reader.getFirstName()) < (head->data.getLastName() + head->data.getFirstName())) {
-        newNode->next = head;
-        if (head) {
-            head->prev = newNode;
+    if (!mHead || (reader.getLastName() + reader.getFirstName()) < (mHead->data.getLastName() + mHead->data.getFirstName()))
+    {
+        newNode->next = mHead;
+        if (mHead)
+        {
+            mHead->prev = newNode;
         }
-        head = newNode;
-    } else {
-        Node* current = head;
-        while (current->next && (current->next->data.getLastName() + current->next->data.getFirstName()) < (reader.getLastName() + reader.getFirstName())) {
+        mHead = newNode;
+    }
+    else
+    {
+        Node *current = mHead;
+        while (current->next && (current->next->data.getLastName() + current->next->data.getFirstName()) < (reader.getLastName() + reader.getFirstName()))
+        {
             current = current->next;
         }
         newNode->next = current->next;
         newNode->prev = current;
-        if (current->next) {
+        if (current->next)
+        {
             current->next->prev = newNode;
         }
         current->next = newNode;
     }
 
-    if (!newNode->next) {
-        tail = newNode;
+    if (!newNode->next)
+    {
+        mTail = newNode;
     }
 
-    size++;
+    mSize++;
 }
 
-void ReaderDoubleLinkedList::remove(const Reader& reader) {
-    if (!head) {
+void ReaderDoubleLinkedList::remove(const Reader &reader)
+{
+    if (!mHead)
+    {
         return;
     }
 
-    if (head->data == reader) {
-        Node* temp = head;
-        head = head->next;
-        if (head) {
-            head->prev = nullptr;
-        } else {
-            tail = nullptr;
+    if (mHead->data == reader)
+    {
+        Node *temp = mHead;
+        mHead = mHead->next;
+        if (mHead)
+        {
+            mHead->prev = nullptr;
+        }
+        else
+        {
+            mTail = nullptr;
         }
         delete temp;
-        size--;
+        mSize--;
         return;
     }
 
-    Node* current = head;
-    while (current->next && current->next->data != reader) {
+    Node *current = mHead;
+    while (current->next && current->next->data != reader)
+    {
         current = current->next;
     }
 
-    if (current->next) {
-        Node* temp = current->next;
+    if (current->next)
+    {
+        Node *temp = current->next;
         current->next = current->next->next;
-        if (current->next) {
+        if (current->next)
+        {
             current->next->prev = current;
-        } else {
-            tail = current;
+        }
+        else
+        {
+            mTail = current;
         }
         delete temp;
-        size--;
+        mSize--;
     }
 }
 
-bool ReaderDoubleLinkedList::contains(const Reader& reader) const {
-    Node* current = head;
-    while (current) {
-        if (current->data.getEmail() == reader.getEmail()) {
+bool ReaderDoubleLinkedList::contains(const Reader &reader) const
+{
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->data.getEmail() == reader.getEmail())
+        {
             return true;
         }
         current = current->next;
@@ -85,12 +109,15 @@ bool ReaderDoubleLinkedList::contains(const Reader& reader) const {
     return false;
 }
 
-ReaderDoubleLinkedList ReaderDoubleLinkedList::find(const std::string& lastName, const std::string& firstName) const {
+ReaderDoubleLinkedList ReaderDoubleLinkedList::find(const std::string &lastName, const std::string &firstName) const
+{
     ReaderDoubleLinkedList matchingReaders;
 
-    Node* current = head;
-    while (current) {
-        if (current->data.getLastName() == lastName && current->data.getFirstName() == firstName) {
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->data.getLastName() == lastName && current->data.getFirstName() == firstName)
+        {
             Reader copiedReader(current->data);
             matchingReaders.insert(copiedReader);
         }
@@ -100,10 +127,13 @@ ReaderDoubleLinkedList ReaderDoubleLinkedList::find(const std::string& lastName,
     return matchingReaders;
 }
 
-Reader* ReaderDoubleLinkedList::findByEmail(const std::string &email) const {
-    Node* current = head;
-    while (current) {
-        if (current->data.getEmail() == email) {
+Reader *ReaderDoubleLinkedList::findByEmail(const std::string &email) const
+{
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->data.getEmail() == email)
+        {
             return &(current->data);
         }
         current = current->next;
@@ -111,27 +141,33 @@ Reader* ReaderDoubleLinkedList::findByEmail(const std::string &email) const {
     return nullptr;
 }
 
-ReaderDoubleLinkedList::Node* ReaderDoubleLinkedList::getFirst() const {
-    return head;
+ReaderDoubleLinkedList::Node *ReaderDoubleLinkedList::getFirst() const
+{
+    return mHead;
 }
 
-Reader* ReaderDoubleLinkedList::getFirstReader() const {
-    if (head) {
-        return &(head->data);
+Reader *ReaderDoubleLinkedList::getFirstReader() const
+{
+    if (mHead)
+    {
+        return &(mHead->data);
     }
     return nullptr;
 }
 
-int ReaderDoubleLinkedList::getSize() const {
-    return size;
+int ReaderDoubleLinkedList::getSize() const
+{
+    return mSize;
 }
 
-void ReaderDoubleLinkedList::display() const {
-    Node* current = head;
+void ReaderDoubleLinkedList::display() const
+{
+    Node *current = mHead;
     Console::clearConsole();
-    std::cout << "Wszyscy czytelnicy: " << std::endl;
-    while (current) {
-        std::cout << "Imie i nazwisko: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
+    std::cout << "Readers: " << std::endl;
+    while (current)
+    {
+        std::cout << "Full name: " << current->data.getFullName() << " | Email: " << current->data.getEmail() << std::endl;
         current = current->next;
     }
     Console::waitForInput();

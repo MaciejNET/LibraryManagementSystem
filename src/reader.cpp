@@ -2,68 +2,82 @@
 
 #include <utility>
 
-Reader::Reader(std::string firstName, std::string lastName, std::string email) : firstName(std::move(firstName)), lastName(std::move(lastName)), email(std::move(email)), borrowedBooks(){
+Reader::Reader(std::string firstName, std::string lastName, std::string email) : mFirstName(std::move(firstName)), mLastName(std::move(lastName)), mEmail(std::move(email)), mBorrowedBooks()
+{
 }
 
-Reader::Reader(const Reader &other) : firstName(other.firstName), lastName(other.lastName), email(other.email), borrowedBooks() {
-    const BorrowedBooksLinkedList& otherBorrowedBooks = other.borrowedBooks;
-    BorrowedBooksLinkedList::Node* borrowedNode = otherBorrowedBooks.getFirst();
-    while (borrowedNode) {
-        borrowedBooks.insert(borrowedNode->book, borrowedNode->borrowedDate);
+Reader::Reader(const Reader &other) : mFirstName(other.mFirstName), mLastName(other.mLastName), mEmail(other.mEmail), mBorrowedBooks()
+{
+    const BorrowedBooksLinkedList &otherBorrowedBooks = other.mBorrowedBooks;
+    BorrowedBooksLinkedList::Node *borrowedNode = otherBorrowedBooks.getFirst();
+    while (borrowedNode)
+    {
+        mBorrowedBooks.insert(borrowedNode->book, borrowedNode->borrowedDate);
         borrowedNode = borrowedNode->next;
     }
 }
 
-std::string Reader::getFirstName() const{
-    return firstName;
+std::string Reader::getFirstName() const
+{
+    return mFirstName;
 }
 
-std::string Reader::getLastName() const {
-    return lastName;
+std::string Reader::getLastName() const
+{
+    return mLastName;
 }
 
-std::string Reader::getEmail() const {
-    return email;
+std::string Reader::getEmail() const
+{
+    return mEmail;
 }
 
-std::string Reader::getFullName() const {
-    return firstName + " " + lastName;
+std::string Reader::getFullName() const
+{
+    return mFirstName + " " + mLastName;
 }
 
-void Reader::borrowBook(const Book &book, const std::string &borrowedDate) {
-    borrowedBooks.insert(book, borrowedDate);
-    Console::printSuccess("Ksiazka \"" + book.getTitle() + "\" zostala wypozyczona przez " + getFullName() + " - " + borrowedDate + ".");
+void Reader::borrowBook(const Book &book, const std::string &borrowedDate)
+{
+    mBorrowedBooks.insert(book, borrowedDate);
+    Console::printSuccess("Book \"" + book.getTitle() + "\" has been borrowed by " + getFullName() + " - " + borrowedDate + ".");
 }
 
-void Reader::insertBook(const Book &book, const std::string &borrowedDate) {
-    borrowedBooks.insert(book, borrowedDate);
+void Reader::insertBook(const Book &book, const std::string &borrowedDate)
+{
+    mBorrowedBooks.insert(book, borrowedDate);
 }
 
-void Reader::returnBook(const Book &book) {
-    borrowedBooks.remove(book);
-    Console::printSuccess("Ksiazka \"" + book.getTitle() + "\" zostala zwrocona przez " + getFullName() + ".");
+void Reader::returnBook(const Book &book)
+{
+    mBorrowedBooks.remove(book);
+    Console::printSuccess("Book \"" + book.getTitle() + "\" has been returned by " + getFullName() + ".");
 }
 
-void Reader::displayBorrowedBooks() const {
+void Reader::displayBorrowedBooks() const
+{
     Console::clearConsole();
-    std::cout << "Wypozyczone ksiazki przez " << getFullName() << ":" << std::endl;
-    borrowedBooks.display();
+    std::cout << "Borrowed books by " << getFullName() << ":" << std::endl;
+    mBorrowedBooks.display();
     Console::waitForInput();
 }
 
-const BorrowedBooksLinkedList& Reader::getBorrowedBooks() const {
-    return borrowedBooks;
+const BorrowedBooksLinkedList &Reader::getBorrowedBooks() const
+{
+    return mBorrowedBooks;
 }
 
-bool Reader::hasBook(const Book &book) const {
+bool Reader::hasBook(const Book &book) const
+{
     return getBorrowedBooks().contains(book);
 }
 
-bool Reader::operator==(const Reader& other) const {
-    return (firstName == other.firstName && lastName == other.lastName);
+bool Reader::operator==(const Reader &other) const
+{
+    return (mFirstName == other.mFirstName && mLastName == other.mLastName);
 }
 
-bool Reader::operator!=(const Reader& other) const {
-    return (firstName != other.firstName || lastName != other.lastName);
+bool Reader::operator!=(const Reader &other) const
+{
+    return (mFirstName != other.mFirstName || mLastName != other.mLastName);
 }
-

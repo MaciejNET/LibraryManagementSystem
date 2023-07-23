@@ -6,31 +6,32 @@
 #include "book.h"
 #include "console.h"
 
-class BorrowedBooksLinkedList {
+class BorrowedBooksLinkedList
+{
 public:
-    struct Node {
+    struct Node
+    {
         Book book;
         std::string borrowedDate;
-        Node* next;
+        Node *next;
 
         Node(Book book, std::string borrowedDate) : book(std::move(book)), borrowedDate(std::move(borrowedDate)), next(nullptr) {}
     };
 
-private:
-    Node* head;
-    int size;
-
 public:
-    BorrowedBooksLinkedList() : head(nullptr), size(0) {}
+    BorrowedBooksLinkedList() : mHead(nullptr), mSize(0) {}
     ~BorrowedBooksLinkedList();
 
-    void insert(const Book& book, const std::string& borrowedDate);
-    void remove(const Book& book);
-    bool contains(const Book& book) const;
-    Node* getFirst() const;
+    void insert(const Book &book, const std::string &borrowedDate);
+    void remove(const Book &book);
+    bool contains(const Book &book) const;
+    Node *getFirst() const;
     int getSize() const;
     void display() const;
+
+private:
+    Node *mHead;
+    int mSize;
 };
 
-
-#endif //LIBRARYMANAGEMENTSYSTEM_BORROWED_BOOKS_LINKED_LIST_H
+#endif // LIBRARYMANAGEMENTSYSTEM_BORROWED_BOOKS_LINKED_LIST_H

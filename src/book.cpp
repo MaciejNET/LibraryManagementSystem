@@ -2,37 +2,45 @@
 
 #include <utility>
 
-Book::Book(std::string title, std::string  author, int count) : title(std::move(title)), author(std::move(author)), count(count) {}
+Book::Book(std::string title, std::string author, int count) : mTitle(std::move(title)), mAuthor(std::move(author)), mCount(count) {}
 
-std::string Book::getTitle() const {
-    return title;
+std::string Book::getTitle() const
+{
+    return mTitle;
 }
 
-std::string Book::getAuthor() const {
-    return author;
+std::string Book::getAuthor() const
+{
+    return mAuthor;
 }
 
-int Book::getCount() const {
-    return count;
+int Book::getCount() const
+{
+    return mCount;
 }
 
-bool Book::isAvailable() const {
-    return count > 0;
+bool Book::isAvailable() const
+{
+    return mCount > 0;
 }
 
-void Book::decreaseCount() {
-    if (count > 0)
-        count--;
+void Book::decreaseCount()
+{
+    if (mCount > 0)
+        mCount--;
 }
 
-void Book::increaseCount(int amount) {
-    count += amount;
+void Book::increaseCount(int amount)
+{
+    mCount += amount;
 }
 
-bool Book::operator==(const Book& other) const {
-    return (title == other.title && author == other.author);
+bool Book::operator==(const Book &other) const
+{
+    return (mTitle == other.mTitle && mAuthor == other.mAuthor);
 }
 
-bool Book::operator!=(const Book& other) const {
-    return (title != other.title || author != other.author);
+bool Book::operator!=(const Book &other) const
+{
+    return (mTitle != other.mTitle || mAuthor != other.mAuthor);
 }

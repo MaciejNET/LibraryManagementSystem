@@ -1,0 +1,3 @@
+/Users/maciejnet/Projects/LibraryManagementSystem/build/CMakeFiles/LibraryManagementSystem.dir
+/Users/maciejnet/Projects/LibraryManagementSystem/build/CMakeFiles/edit_cache.dir
+/Users/maciejnet/Projects/LibraryManagementSystem/build/CMakeFiles/rebuild_cache.dir

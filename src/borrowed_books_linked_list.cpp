@@ -1,62 +1,77 @@
 #include "../include/borrowed_books_linked_list.h"
 
-BorrowedBooksLinkedList::~BorrowedBooksLinkedList() {
-    Node* current = head;
-    while (current) {
-        Node* next = current->next;
+BorrowedBooksLinkedList::~BorrowedBooksLinkedList()
+{
+    Node *current = mHead;
+    while (current)
+    {
+        Node *next = current->next;
         delete current;
         current = next;
     }
 }
 
-void BorrowedBooksLinkedList::insert(const Book& book, const std::string& borrowedDate) {
-    Node* newNode = new Node(book, borrowedDate);
+void BorrowedBooksLinkedList::insert(const Book &book, const std::string &borrowedDate)
+{
+    Node *newNode = new Node(book, borrowedDate);
 
-    if (!head || borrowedDate < head->borrowedDate) {
-        newNode->next = head;
-        head = newNode;
-    } else {
-        Node* current = head;
-        while (current->next && current->next->borrowedDate < borrowedDate) {
+    if (!mHead || borrowedDate < mHead->borrowedDate)
+    {
+        newNode->next = mHead;
+        mHead = newNode;
+    }
+    else
+    {
+        Node *current = mHead;
+        while (current->next && current->next->borrowedDate < borrowedDate)
+        {
             current = current->next;
         }
         newNode->next = current->next;
         current->next = newNode;
     }
 
-    size++;
+    mSize++;
 }
 
-void BorrowedBooksLinkedList::remove(const Book& book) {
-    if (!head) {
+void BorrowedBooksLinkedList::remove(const Book &book)
+{
+    if (!mHead)
+    {
         return;
     }
 
-    if (head->book == book) {
-        Node* temp = head;
-        head = head->next;
+    if (mHead->book == book)
+    {
+        Node *temp = mHead;
+        mHead = mHead->next;
         delete temp;
-        size--;
+        mSize--;
         return;
     }
 
-    Node* current = head;
-    while (current->next && current->next->book != book) {
+    Node *current = mHead;
+    while (current->next && current->next->book != book)
+    {
         current = current->next;
     }
 
-    if (current->next) {
-        Node* temp = current->next;
+    if (current->next)
+    {
+        Node *temp = current->next;
         current->next = current->next->next;
         delete temp;
-        size--;
+        mSize--;
     }
 }
 
-bool BorrowedBooksLinkedList::contains(const Book &book) const {
-    Node* current = head;
-    while (current) {
-        if (current->book == book) {
+bool BorrowedBooksLinkedList::contains(const Book &book) const
+{
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->book == book)
+        {
             return true;
         }
 
@@ -66,20 +81,24 @@ bool BorrowedBooksLinkedList::contains(const Book &book) const {
     return false;
 }
 
-BorrowedBooksLinkedList::Node* BorrowedBooksLinkedList::getFirst() const {
-    return head;
+BorrowedBooksLinkedList::Node *BorrowedBooksLinkedList::getFirst() const
+{
+    return mHead;
 }
 
-int BorrowedBooksLinkedList::getSize() const {
-    return size;
+int BorrowedBooksLinkedList::getSize() const
+{
+    return mSize;
 }
 
-void BorrowedBooksLinkedList::display() const {
-    Node* current = head;
+void BorrowedBooksLinkedList::display() const
+{
+    Node *current = mHead;
     Console::clearConsole();
-    std::cout << "Ksiazki wypozyczone przez czytelnika:" << std::endl;
-    while (current) {
-        std::cout << "Tytul: " << current->book.getTitle() << " | Autor: " << current->book.getAuthor() << " | Data wypozyczenia: " << current->borrowedDate << std::endl;
+    std::cout << "Borrowed books by reader:" << std::endl;
+    while (current)
+    {
+        std::cout << "Title: " << current->book.getTitle() << " | Author: " << current->book.getAuthor() << " | Borrowed date: " << current->borrowedDate << std::endl;
         current = current->next;
     }
     Console::waitForInput();

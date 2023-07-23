@@ -1,61 +1,76 @@
 #include "../include/book_linked_list.h"
-BookLinkedList::~BookLinkedList() {
-    Node* current = head;
-    while (current) {
-        Node* next = current->next;
+BookLinkedList::~BookLinkedList()
+{
+    Node *current = mHead;
+    while (current)
+    {
+        Node *next = current->next;
         delete current;
         current = next;
     }
 }
 
-void BookLinkedList::insert(const Book &book) {
-    Node* newNode = new Node(book);
+void BookLinkedList::insert(const Book &book)
+{
+    Node *newNode = new Node(book);
 
-    if (!head || book.getTitle() < head->data.getTitle()) {
-        newNode->next = head;
-        head = newNode;
-    } else {
-        Node* current = head;
-        while (current->next && current->next->data.getTitle() < book.getTitle()) {
+    if (!mHead || book.getTitle() < mHead->data.getTitle())
+    {
+        newNode->next = mHead;
+        mHead = newNode;
+    }
+    else
+    {
+        Node *current = mHead;
+        while (current->next && current->next->data.getTitle() < book.getTitle())
+        {
             current = current->next;
         }
         newNode->next = current->next;
         current->next = newNode;
     }
 
-    size++;
+    mSize++;
 }
 
-void BookLinkedList::remove(const Book &book) {
-    if (!head) {
+void BookLinkedList::remove(const Book &book)
+{
+    if (!mHead)
+    {
         return;
     }
 
-    if (head->data == book) {
-        Node* temp = head;
-        head = head->next;
+    if (mHead->data == book)
+    {
+        Node *temp = mHead;
+        mHead = mHead->next;
         delete temp;
-        size--;
+        mSize--;
         return;
     }
 
-    Node* current = head;
-    while (current->next && current->next->data != book) {
+    Node *current = mHead;
+    while (current->next && current->next->data != book)
+    {
         current = current->next;
     }
 
-    if (current->next) {
-        Node* temp = current->next;
+    if (current->next)
+    {
+        Node *temp = current->next;
         current->next = current->next->next;
         delete temp;
-        size--;
+        mSize--;
     }
 }
 
-bool BookLinkedList::contains(const Book& book) const {
-    Node* current = head;
-    while (current) {
-        if (current->data == book) {
+bool BookLinkedList::contains(const Book &book) const
+{
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->data == book)
+        {
             return true;
         }
         current = current->next;
@@ -63,11 +78,14 @@ bool BookLinkedList::contains(const Book& book) const {
     return false;
 }
 
-Book* BookLinkedList::find(const std::string& title, const std::string& author) const {
-    Node* current = head;
+Book *BookLinkedList::find(const std::string &title, const std::string &author) const
+{
+    Node *current = mHead;
     Book temp(title, author, 1);
-    while (current) {
-        if (current->data == temp) {
+    while (current)
+    {
+        if (current->data == temp)
+        {
             return &(current->data);
         }
         current = current->next;
@@ -75,12 +93,15 @@ Book* BookLinkedList::find(const std::string& title, const std::string& author) 
     return nullptr;
 }
 
-BookLinkedList BookLinkedList::findByAuthor(const std::string &author) const {
+BookLinkedList BookLinkedList::findByAuthor(const std::string &author) const
+{
     BookLinkedList matchingBooks;
-    Node* current = head;
+    Node *current = mHead;
 
-    while (current) {
-        if (current->data.getAuthor() == author) {
+    while (current)
+    {
+        if (current->data.getAuthor() == author)
+        {
             matchingBooks.insert(current->data);
         }
         current = current->next;
@@ -89,46 +110,55 @@ BookLinkedList BookLinkedList::findByAuthor(const std::string &author) const {
     return matchingBooks;
 }
 
-BookLinkedList::Node* BookLinkedList::getFirst() const {
-    return head;
+BookLinkedList::Node *BookLinkedList::getFirst() const
+{
+    return mHead;
 }
 
-int BookLinkedList::getSize() const {
-    return size;
+int BookLinkedList::getSize() const
+{
+    return mSize;
 }
 
-void BookLinkedList::display() const {
-    Node* current = head;
+void BookLinkedList::display() const
+{
+    Node *current = mHead;
     Console::clearConsole();
-    std::cout << "Wszystkie ksiazki:" << std::endl;
-    while (current) {
-        std::cout << "Tytul: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilosc: " << current->data.getCount() << std::endl;
+    std::cout << "Books:" << std::endl;
+    while (current)
+    {
+        std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | Amount: " << current->data.getCount() << std::endl;
         current = current->next;
     }
     Console::waitForInput();
 }
 
-void BookLinkedList::displayAvailable() const {
-    Node* current = head;
+void BookLinkedList::displayAvailable() const
+{
+    Node *current = mHead;
     Console::clearConsole();
-    std::cout << "Dostępne ksiazki:" << std::endl;
-    while (current) {
-        if (current->data.isAvailable()) {
-            std::cout << "Tytul: " << current->data.getTitle() << " | Autor: " << current->data.getAuthor() << " | Ilosc: " << current->data.getCount() << std::endl;
+    std::cout << "Available books:" << std::endl;
+    while (current)
+    {
+        if (current->data.isAvailable())
+        {
+            std::cout << "Title: " << current->data.getTitle() << " | Author: " << current->data.getAuthor() << " | Amount: " << current->data.getCount() << std::endl;
         }
         current = current->next;
     }
     Console::waitForInput();
 }
 
-bool BookLinkedList::isAvailable(const Book &book) const {
-    Node* current = head;
-    while (current) {
-        if (current->data == book && current->data.isAvailable()) {
+bool BookLinkedList::isAvailable(const Book &book) const
+{
+    Node *current = mHead;
+    while (current)
+    {
+        if (current->data == book && current->data.isAvailable())
+        {
             return true;
         }
         current = current->next;
     }
     return false;
 }
-
